@@ -11,6 +11,7 @@ class Wtw
 
   def to_json
     {
+      :attribution => @forecast.attribution,
       :time => @forecast.time,
       :brolly => @brolly,
       :shades => @shades,
