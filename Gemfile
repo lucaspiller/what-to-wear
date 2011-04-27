@@ -2,4 +2,5 @@
 source "http://rubygems.org"
 
 # gem "rails"
+gem "sinatra"
 gem "nokogiri"
