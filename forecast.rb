@@ -1,7 +1,10 @@
 require 'date'
+require 'open-uri'
 require 'nokogiri'
 
 class Forecast
+  ENDPOINT = "http://www.yr.no/place"
+
   attr_reader :location, :time, :symbol, :precipitation, :temperature, :windspeed, :attribution
 
   def initialize(location)
@@ -48,6 +51,12 @@ class Forecast
   def fetch_data
     if $DUMMY
       @doc = Nokogiri::XML(open('sample.xml'))
+    else
+      @doc = Nokogiri::XML(open(url_for_location(@location)))
     end
+  end
+
+  def url_for_location(location)
+    "#{ENDPOINT}/#{location.country}/#{location.area1}/#{location.area2}/forecast.xml".gsub(' ', '%20')
   end
 end

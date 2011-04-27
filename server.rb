@@ -1,13 +1,15 @@
 $: << File.dirname(__FILE__)
-$DUMMY = true
+$DUMMY = false
 
 require 'json'
 require 'sinatra'
 require 'forecast'
 require 'wtw'
+require 'location'
 
 get '/forecast' do
-  location = params[:location]
+  location = Location.new(params[:location])
+  location.parse
   forecast = Forecast.new(location)
   forecast.fetch
   wtw = Wtw.new(forecast)
