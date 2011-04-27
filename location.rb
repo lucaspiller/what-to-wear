@@ -8,12 +8,12 @@ class Location
   end
 
   def parse
-    raise InvalidLocationException.new("Invalid location") if @string.nil? || @string.length == 0
     if @string =~ /^(.+),(.+),(.+)$/
       @country = $3.strip.downcase
       @area1 = $2.strip.downcase
       @area2 = $1.strip.downcase
     end
+    raise InvalidLocationException.new
   end
 
   def to_json
