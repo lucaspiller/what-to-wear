@@ -49,10 +49,10 @@ class Forecast
   protected
 
   def fetch_data
-    if $DUMMY
-      @doc = Nokogiri::XML(open('sample.xml'))
+    @doc = if $DUMMY
+      Nokogiri::XML(open('sample.xml'))
     else
-      @doc = Nokogiri::XML(open(url_for_location(@location)))
+      Nokogiri::XML(open(url_for_location(@location)))
     end
   end
 
